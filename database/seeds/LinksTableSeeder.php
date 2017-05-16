@@ -12,21 +12,28 @@ class LinksTableSeeder extends Seeder
     public function run()
     {
         //
-        Links::create([
+        $timeRec = time();
+        Link::create([
 			'token' => 0112,
-			'target_url' => 'Yandex.ru'
+			'target_url' => 'https://Yandex.ru'
 		]);
-        Links::create([
+        $timeRec = $timeRec +10;
+        Link::create([
             'token' => 0113,
-            'target_url' => 'Google.com'
+            'target_url' => 'https://Google.com',
+            'created_ad' => date('Y-m-d H:i:s', $timeRec)
         ]);
-        Links::create([
+        $timeRec = $timeRec +10;
+        Link::create([
             'token' => 0114,
-            'target_url' => 'Yahoo.com'
+            'target_url' => 'https://Yahoo.com',
+            'created_ad' => date('Y-m-d H:i:s', $timeRec)
         ]);
-        Links::create([
+        $timeRec = $timeRec +10;
+        Link::create([
             'token' => 0115,
-            'target_url' => 'Bing.com'
+            'target_url' => 'https://Bing.com',
+            'created_ad' => date('Y-m-d H:i:s', $timeRec)
         ]);
     }
 }

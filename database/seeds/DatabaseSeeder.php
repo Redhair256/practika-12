@@ -1,7 +1,6 @@
-<?php
+vj<?php
 
 use Illuminate\Database\Seeder;
-use LinksTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {

@@ -42,24 +42,22 @@
                </tr>
             </thead>
             <tbody>
+               @foreach($links as $link)
+                  <tr>
+                  <td align='center'><a href='{{ $link->target_url }}'><span class='glyphicon glyphicon-link' aria-hidden='false'></span></a></td>
+                  <td>{{ $link->token }}</td>
+                  <td><a href='{{ $link->target_url}}'>{{ $link->target_url}}</a></td>
+                  <td align='center'><a href='link/{{ $link->token}}'><span class='glyphicon glyphicon-eye-open' aria-hidden='false'></span></a></td>
+                  </tr>
+                @endforeach  
+
                <tr>
                   <td align="center"><a href="#"><span class="glyphicon glyphicon-link" aria-hidden="false" ></span></a></td>
                   <td>...</td>
                   <td><a href="http://vk.com"> http://vk.com </a></td>
                   <td align="center"><a href="statistics.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="false"></span></a></td>
                </tr>
-               <tr>
-                  <td align="center"><a href="#"><span class="glyphicon glyphicon-link" aria-hidden="false"></span></a></td>
-                  <td>...</td>
-                  <td><a href="http://Google.com"> http://Google.com </a></td>
-                  <td align="center"><a href="statistics.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="false"></span></a></td>
-               </tr>
-               <tr>
-                  <td align="center"><a href="#"><span class="glyphicon glyphicon-link" aria-hidden="false"></span></a></td>
-                  <td>...</td>
-                  <td><a href="http://Google.ru"> http://Google.ru </a></td>
-                  <td align="center"><a href="statistics.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="false"></span></a></td>
-               </tr>
+    
             </tbody>
          </table>
       </div>

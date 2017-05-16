@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Link;
 
 class LinkController extends Controller
 {
@@ -15,8 +16,8 @@ class LinkController extends Controller
     public function index()
     {
         //
-        $results = DB::select('select * from Links');
-        return view('links.listing', $results);
+        $links = Link::all();
+        return view('links.listing', [ 'links' => $links ]);
 
     }
 
