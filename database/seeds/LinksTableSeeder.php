@@ -12,9 +12,21 @@ class LinksTableSeeder extends Seeder
     public function run()
     {
         //
-        Link::create([
+        Links::create([
 			'token' => 0112,
-			'target_url' => '...'
+			'target_url' => 'Yandex.ru'
 		]);
+        Links::create([
+            'token' => 0113,
+            'target_url' => 'Google.com'
+        ]);
+        Links::create([
+            'token' => 0114,
+            'target_url' => 'Yahoo.com'
+        ]);
+        Links::create([
+            'token' => 0115,
+            'target_url' => 'Bing.com'
+        ]);
     }
 }

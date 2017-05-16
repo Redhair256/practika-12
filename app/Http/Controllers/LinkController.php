@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class LinkController extends Controller
 {
@@ -14,7 +15,8 @@ class LinkController extends Controller
     public function index()
     {
         //
-        return view('links.listing');
+        $results = DB::select('select * from Links');
+        return view('links.listing', $results);
 
     }
 
