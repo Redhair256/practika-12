@@ -14,24 +14,24 @@ class LinksTableSeeder extends Seeder
         //
         $timeRec = time();
         Link::create([
-			'token' => 0112,
+			'token' => 'qwertyuiopasdfghjklz',
 			'target_url' => 'https://Yandex.ru'
 		]);
         $timeRec = $timeRec +10;
         Link::create([
-            'token' => 0113,
+            'token' => 'wertyuiopasdfghjklzx',
             'target_url' => 'https://Google.com',
             'created_ad' => date('Y-m-d H:i:s', $timeRec)
         ]);
         $timeRec = $timeRec +10;
         Link::create([
-            'token' => 0114,
+            'token' => 'ertyuiopasdfghjklzxc',
             'target_url' => 'https://Yahoo.com',
             'created_ad' => date('Y-m-d H:i:s', $timeRec)
         ]);
         $timeRec = $timeRec +10;
         Link::create([
-            'token' => 0115,
+            'token' => 'rtyuiopasdfghjklzxcv',
             'target_url' => 'https://Bing.com',
             'created_ad' => date('Y-m-d H:i:s', $timeRec)
         ]);

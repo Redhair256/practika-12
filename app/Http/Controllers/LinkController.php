@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use DB;
 use App\Link;
 
@@ -24,14 +22,15 @@ class LinkController extends Controller
     }
     public function create(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'target_url' => 'url'
+        $this->validate($request, [
+            'target_url' => 'active_url'
             ]);
-        if ($validator->fails()) {
-            return redirect('./links')
-                  ->withErrors($validator)
-                  ->withInput();
-        }
+
+
+        $links = new Link;
+        $links->token = 0120;
+        $links->target_url = $request->target_url;  
+        $links->save();
 
         return redirect('./links');
     }
