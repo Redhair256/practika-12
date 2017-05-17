@@ -8,7 +8,9 @@
       <link rel="stylesheet" href="http://localhost/practika-05/public/vendor/twbs/bootstrap/dist/css/bootstrap.min.css" >
    </head>
    <body>
+
       <nav class="navbar navbar-default" role="navigation">
+      <!-- Содержимое Navbar -->
          <div class="container">
          <ul class="nav navbar-nav">
             <li><a href="links"><span class="glyphicon glyphicon-list" aria-hidden="false"></span>
@@ -17,17 +19,33 @@
             <li><a href="link\123"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span>
                Статистика</a>
             </li>
+
          </ul>
+         </div>
       </nav>
+
       <div class="container">
          <h4>Добавить ссылку</h4>
+         <form action="{{ url('./create') }}" method="POST">
          <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-link" aria-hidden="false"></span></span>
-            <input type="text" class="form-control" placeholder="Https:\\" aria-describedby="basic-addon1">
+            <input type="text" name="target_url" class="form-control" placeholder="Https:\\" aria-describedby="basic-addon1">
             <span class="input-group-btn">
-            <button class="btn btn-primary" type="button" > Добавить <span class="glyphicon glyphicon-arrow-right" aria-hidden="false"></span></button>
+            <button class="btn btn-primary" type="submit" > Добавить <span class="glyphicon glyphicon-arrow-right" aria-hidden="false"></span></button>
             </span>
          </div>
+         </form>
+
+         @if (count($errors) > 0)
+         <div class="alert alert-danger">
+            <ul>
+               @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+               @endforeach
+            </ul>
+         </div>
+         @endif
+
          <br>
          <h4>Cсылки</h4>
          <table class="table table-bordered">
@@ -54,8 +72,8 @@
                <tr>
                   <td align="center"><a href="#"><span class="glyphicon glyphicon-link" aria-hidden="false" ></span></a></td>
                   <td>...</td>
-                  <td><a href="http://vk.com"> http://vk.com </a></td>
-                  <td align="center"><a href="statistics.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="false"></span></a></td>
+                  <td><a href="#"> ... </a></td>
+                  <td align="center"><a href="link/01"><span class="glyphicon glyphicon-eye-open" aria-hidden="false"></span></a></td>
                </tr>
     
             </tbody>

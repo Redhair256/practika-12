@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use DB;
 use App\Link;
 
@@ -19,6 +21,12 @@ class LinkController extends Controller
         $links = Link::all();
         return view('links.listing', [ 'links' => $links ]);
 
+    }
+    public function create(Request $request)
+    {
+        
+
+        return redirect('links.listing');
     }
 
 /**
