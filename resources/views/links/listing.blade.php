@@ -27,6 +27,7 @@
       <div class="container">
          <h4>Добавить ссылку</h4>
          <form action="{{ url('./create') }}" method="POST">
+         {{ csrf_field() }} <!-- Очень важная строчка!!! Иначе ни черта не работает. -->
          <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-link" aria-hidden="false"></span></span>
             <input type="text" name="target_url" class="form-control" placeholder="Https:\\" aria-describedby="basic-addon1">
