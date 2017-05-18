@@ -21,15 +21,15 @@
     <h4>Выбрать ссылку</h4>
     <div class="input-group input-group-lg">
       <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-link" aria-hidden="false"></span></span>
-      <select class="form-control" size="0" id="sel1"  aria-describedby="basic-addon1">
+      <select class="form-control" size="0" id="sel1"  aria-describedby="basic-addon1" onchange="top.location=this.value">
         <option disabled>Выберите код</option>
 
         @foreach($links as $link)
 
         @if ( $link->id == $curent_link->id )
-          <option selected value="{{ $link->id }}">{{ $link->token }}</option>
+          <option selected value="{{ $link->token}}">{{ $link->token }}</option>
         @else
-          <option value="{{ $link->id }}">{{ $link->token }}</option>
+          <option value="{{ $link->token }}">{{ $link->token }}</option>
         @endif
 
         @endforeach 

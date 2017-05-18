@@ -46,9 +46,8 @@ class LinkController extends Controller
         //
         $curent_link = Link::where('token', $id )->first();
         $links = Link::all();
-        $clicks = Click::where('link_id', $curent_link->id );
+        $clicks = Click::where('link_id', $curent_link->id )->get();
         $num_click = $clicks->count();
-        $clicks->first();
         return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);
         
     }
