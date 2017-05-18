@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Link;
+use App\Click;
 
 class LinkController extends Controller
 {
@@ -28,7 +29,7 @@ class LinkController extends Controller
 
 
         $links = new Link;
-        $links->token = 0120;
+        $links->token = str_random(20);
         $links->target_url = $request->target_url;  
         $links->save();
 
@@ -40,10 +41,15 @@ class LinkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function view()
+    public function view($id)
     {
         //
-        return view('links.statistics');
+        $curent_link = Link::where('token', $id )->first();
+        $links = Link::all();
+        $clicks = Click::where('link_id', $curent_link->id );
+        $num_click = $clicks->count();
+        $clicks->first();
+        return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);
         
     }
 }

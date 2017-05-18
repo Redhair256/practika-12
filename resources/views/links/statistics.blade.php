@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="http://localhost/practika-05/public/vendor/twbs/bootstrap/dist/css/bootstrap.min.css" > 
 	</head>
 	<body>
+  
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
       <ul class="nav navbar-nav">
@@ -15,15 +16,24 @@
           Статистика</a></li>
       </ul>
     </nav>
+
     <div class="container">
     <h4>Выбрать ссылку</h4>
     <div class="input-group input-group-lg">
       <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-link" aria-hidden="false"></span></span>
-      <select class="form-control" size="0" id="sel1" aria-describedby="basic-addon1">
+      <select class="form-control" size="0" id="sel1"  aria-describedby="basic-addon1">
         <option disabled>Выберите код</option>
-        <option value="1">1234567890</option>
-        <option value="2">2345678901</option>
-        <option value="3">3456789012</option>
+
+        @foreach($links as $link)
+
+        @if ( $link->id == $curent_link->id )
+          <option selected value="{{ $link->id }}">{{ $link->token }}</option>
+        @else
+          <option value="{{ $link->id }}">{{ $link->token }}</option>
+        @endif
+
+        @endforeach 
+
       </select>
     </div>
     <br>
@@ -40,9 +50,9 @@
           <tbody>
             <tr>
               <td align="center"><a href="#"><span class="glyphicon glyphicon-link" aria-hidden="false" ></span></a></td>
-              <td>...</td>
-              <td><a href="http://vk.com"> http://vk.com </a></td>
-              <td align="Left"> 2 </td>
+              <td>{{$curent_link->token}}</td>
+              <td><a href="{{ $curent_link->target_url }}"> {{ $curent_link->target_url }} </a></td>
+              <td align="right"> {{ $num_click }} </td>
             </tr>
           </tbody>
          </table> 
@@ -57,14 +67,14 @@
            </tr>
           </thead>
           <tbody>
+
+          @foreach($clicks as $click)
             <tr>
-              <td>01.05.2017 16:05:10</td>
-              <td>10.93.229.188</td>
+              <td> {{ $click->created_ad }} </td>
+              <td><a href="#"> {{ $click->user_id }} </a></td>
             </tr>
-            <tr>
-              <td>01.05.2017 16:05:49</td>
-              <td>10.93.229.188</td>
-            </tr>
+          @endforeach
+
           </tbody>
          </table> 
     </div>
