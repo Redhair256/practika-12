@@ -5,7 +5,7 @@
    <head>
       <meta charset="utf-8">
       <title>Listing</title>
-      <link rel="stylesheet" href="http://localhost/practika-05/public/vendor/twbs/bootstrap/dist/css/bootstrap.min.css" >
+      <link rel="stylesheet" href={{ asset('vendor/twbs/bootstrap/dist/css/bootstrap.min.css') }} >
    </head>
    <body>
 
@@ -80,8 +80,8 @@
             </tbody>
          </table>
       </div>
-      <script type="text/javascript" src="http://localhost/practika-05/vendor/components/jquery/jquery.min.js"></script>
-      <script type="text/javascript" src="http://localhost/practika-05/vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>    
+      <script type="text/javascript" src={{ asset('vendor/components/jquery/jquery.min.js') }}></script>
+      <script type="text/javascript" src={{ asset('vendor/twbs/bootstrap/dist/js/bootstrap.min.js') }}></script>    
    </body>
 </html>
 
