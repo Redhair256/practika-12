@@ -20,3 +20,5 @@ Route::get('/links', 'LinkController@index');
 Route::post('/create', 'LinkController@create');
 
 Route::get('/link/{id}', 'LinkController@view'); 
+
+Route::get('/r/{link_token}', 'LinkController@redirect'); 

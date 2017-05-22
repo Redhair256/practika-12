@@ -13,15 +13,14 @@ class CreateUsersIdTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_id', function (Blueprint $table) {
+        Schema::create('user_ids', function (Blueprint $table) {
             $table->increments('id');
             $table->char('token',20); 
-            $table->char('ip', 15); 
             $table->char('browser', 64); 
             $table->char('os', 32);  
-            $table->char('target_url', 255);
-            $table->timestamp('created_ad'); 
             $table->integer('link_id');
+            $table->timestamp('created_at'); 
+            $table->timestamp('updated_at');
         });
     }
 
@@ -32,6 +31,6 @@ class CreateUsersIdTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_id');
+        Schema::dropIfExists('user_ids');
     }
 }

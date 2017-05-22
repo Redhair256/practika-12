@@ -24,20 +24,30 @@
       <select class="form-control" size="0" id="sel1"  aria-describedby="basic-addon1" onchange="top.location=this.value">
         <option disabled>Выберите код</option>
 
+      @if ( $curent_link == null )  
+
         @foreach($links as $link)
 
-        @if ( $link->id == $curent_link->id )
-          <option selected value="{{ $link->token}}">{{ $link->token }}</option>
-        @else
           <option value="{{ $link->token }}">{{ $link->token }}</option>
-        @endif
 
         @endforeach 
 
+      @else
+        @foreach($links as $link)
+
+          @if ( $link->id == $curent_link->id )
+            <option selected value="{{ $link->token}}">{{ $link->token }}</option>
+          @else
+            <option value="{{ $link->token }}">{{ $link->token }}</option>
+          @endif
+
+        @endforeach 
+      @endif
       </select>
     </div>
     <br>
-    <h4>Статистика</h4>
+    @if ( $curent_link != null )
+      <h4>Статистика</h4>
         <table class="table table-bordered">
           <thead> 
             <tr>
@@ -57,9 +67,9 @@
           </tbody>
          </table> 
     
-    <br>
-    <h4>Преходы</h4>
-    <table class="table table-bordered">
+      <br>
+      <h4>Преходы</h4>
+      <table class="table table-bordered">
           <thead> 
             <tr>
               <th width=290><b> Время перехода </b></th>
@@ -76,7 +86,8 @@
           @endforeach
 
           </tbody>
-         </table> 
+        </table> 
+      @endif
     </div>
     <script type="text/javascript" src= {{ asset('vendor/components/jquery/jquery.min.js') }} ></script>
     <script type="text/javascript" src= {{ asset('vendor/twbs/bootstrap/dist/js/bootstrap.min.js') }} ></script>    
