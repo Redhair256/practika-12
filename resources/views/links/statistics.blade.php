@@ -81,7 +81,7 @@
           @foreach($clicks as $click)
             <tr>
               <td> {{ $click->created_ad }} </td>
-              <td><a href="#"> {{ $click->user_id }} </a></td>
+              <td><a href="#"> {{ $click->ip }} </a></td>
             </tr>
           @endforeach
 

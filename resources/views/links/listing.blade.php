@@ -63,7 +63,7 @@
             <tbody>
                @foreach($links as $link)
                   <tr>
-                  <td align='center'><a href='{{ $link->target_url }}'><span class='glyphicon glyphicon-link' aria-hidden='false'></span></a></td>
+                  <td align='center'><a href='r/{{ $link->token }}'><span class='glyphicon glyphicon-link' aria-hidden='false'></span></a></td>
                   <td>{{ $link->token }}</td>
                   <td><a href='{{ $link->target_url}}'>{{ $link->target_url}}</a></td>
                   <td align='center'><a href='link/{{ $link->token}}'><span class='glyphicon glyphicon-eye-open' aria-hidden='false'></span></a></td>

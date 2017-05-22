@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Jenssegers\Agent\Agent;
 use DB;
 use App\Link;
 use App\Click;
@@ -62,24 +63,43 @@ class LinkController extends Controller
 
     public function redirect(Request $request, $link_token)
     {
+        $agent = new Agent();
+        $agent->setUserAgent($request->header('User-Agent')); 
         $curent_link = Link::where('token', $link_token )->first();
+        if($agent->isRobot())
+        {
+            return redirect($curent_link->target_url)
+        }
+        
         $user_token = Cookie::get('uid');
+
         if($user_token == null)
         {
             $user_token = str_random(20);
             $user_id = new user_id;
             $user_id ->token = $user_token;
-            $user_id ->browser = 'browser';
-            $user_id ->os = 'Windows7';
+            $user_id ->browser = $agent->browser();
+            $user_id ->os = $agent->platform();
             $user_id ->link_id = $curent_link ->id;
             $user_id ->save();
         }
         $user_id = User_id::where('token', $user_token )->first();
+        if($user_id == null)
+        {
+            $user_token = str_random(20);
+            $user_id = new user_id;
+            $user_id ->token = $user_token;
+            $user_id ->browser = $agent->browser();
+            $user_id ->os = $agent->platform();;
+            $user_id ->link_id = $curent_link ->id;
+            $user_id ->save();
+        }
         $curent_click = new Click;
         $curent_click ->user_id = $user_id ->id;
         $curent_click ->link_id = $curent_link ->id;
         $curent_click ->ip = $request ->ip();
         $curent_click ->save();
+
 
         return redirect($curent_link->target_url)->withCookie(cookie('uid', $user_token));
     }
