@@ -16,7 +16,7 @@
             <li><a href="links"><span class="glyphicon glyphicon-list" aria-hidden="false"></span>
                Ссылки</a>
             </li>
-            <li><a href="link\123"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span>
+            <li><a href="statistics"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span>
                Статистика</a>
             </li>
 
@@ -63,10 +63,10 @@
             <tbody>
                @foreach($links as $link)
                   <tr>
-                  <td align='center'><a href='r/{{ $link->token }}'><span class='glyphicon glyphicon-link' aria-hidden='false'></span></a></td>
+                  <td align='center'><a href='r/{{ $link->token }}' target="_blank"><span class='glyphicon glyphicon-link' aria-hidden='false'></span></a></td>
                   <td>{{ $link->token }}</td>
                   <td><a href='{{ $link->target_url}}'>{{ $link->target_url}}</a></td>
-                  <td align='center'><a href='link/{{ $link->token}}'><span class='glyphicon glyphicon-eye-open' aria-hidden='false'></span></a></td>
+                  <td align='center'><a href='statistics/{{ $link->token}}'><span class='glyphicon glyphicon-eye-open' aria-hidden='false'></span></a></td>
                   </tr>
                 @endforeach  
 
@@ -74,7 +74,7 @@
                   <td align="center"><a href="#"><span class="glyphicon glyphicon-link" aria-hidden="false" ></span></a></td>
                   <td>...</td>
                   <td><a href="#"> ... </a></td>
-                  <td align="center"><a href="link/01"><span class="glyphicon glyphicon-eye-open" aria-hidden="false"></span></a></td>
+                  <td align="center"><a href="statistics/01"><span class="glyphicon glyphicon-eye-open" aria-hidden="false"></span></a></td>
                </tr>
     
             </tbody>

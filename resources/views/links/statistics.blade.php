@@ -12,7 +12,7 @@
       <ul class="nav navbar-nav">
         <li><a href="..\links"><span class="glyphicon glyphicon-list" aria-hidden="false"></span>
           Ссылки</a></li>
-        <li><a href="123"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span>
+        <li><a href="#"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span>
           Статистика</a></li>
       </ul>
     </nav>

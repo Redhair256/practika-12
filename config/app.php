@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -177,7 +177,15 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Application Agent...
+         */
         Jenssegers\Agent\AgentServiceProvider::class,
+        
+        /*
+         * Application Debugbar...
+         */
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 

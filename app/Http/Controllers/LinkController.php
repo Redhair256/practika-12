@@ -44,6 +44,11 @@ class LinkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function viewNew()
+    {
+        return redirect('./statistics/123');
+    }
     public function view($id)
     {
         //
@@ -68,9 +73,9 @@ class LinkController extends Controller
         $curent_link = Link::where('token', $link_token )->first();
         if($agent->isRobot())
         {
-            return redirect($curent_link->target_url)
+            return redirect($curent_link->target_url);
         }
-        
+
         $user_token = Cookie::get('uid');
 
         if($user_token == null)

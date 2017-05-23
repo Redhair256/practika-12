@@ -3,7 +3,7 @@
 use App\Click;
 use Illuminate\Database\Seeder;
 
-class ClicksTableSeeder extends Seeder
+class User_IdsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
