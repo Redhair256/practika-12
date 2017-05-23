@@ -29,12 +29,21 @@ class LinkController extends Controller
         $this->validate($request, [
             'target_url' => 'active_url'
             ]);
+        $i=0;
+        do{
+            $i++;
+            $link_token =  str_random(20); 
+            $curent_link = Link::where('token', $link_token )->first();
+        } while($curent_link != null||$i <4);
+        if ($curent_link != null)
+        {
 
-
-        $links = new Link;
-        $links->token = str_random(20);
-        $links->target_url = $request->target_url;  
-        $links->save();
+        }else{
+            $links = new Link;
+            $links->token = $link_token;
+            $links->target_url = $request->target_url;  
+            $links->save();
+        }
 
         return redirect('./links');
     }
@@ -45,11 +54,7 @@ class LinkController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function viewNew()
-    {
-        return redirect('./statistics/123');
-    }
-    public function view($id)
+    public function view($id = '123')
     {
         //
         $curent_link = Link::where('token', $id )->first();
@@ -68,6 +73,7 @@ class LinkController extends Controller
 
     public function redirect(Request $request, $link_token)
     {
+        $curent_ip = $request ->ip();
         $agent = new Agent();
         $agent->setUserAgent($request->header('User-Agent')); 
         $curent_link = Link::where('token', $link_token )->first();
@@ -78,19 +84,16 @@ class LinkController extends Controller
 
         $user_token = Cookie::get('uid');
 
-        if($user_token == null)
+        if($user_token != null)
         {
-            $user_token = str_random(20);
-            $user_id = new user_id;
-            $user_id ->token = $user_token;
-            $user_id ->browser = $agent->browser();
-            $user_id ->os = $agent->platform();
-            $user_id ->link_id = $curent_link ->id;
-            $user_id ->save();
+            $user_id = User_id::where('token', $user_token )->first();
+        }else{
+            $user_id = null;
         }
-        $user_id = User_id::where('token', $user_token )->first();
+
         if($user_id == null)
         {
+
             $user_token = str_random(20);
             $user_id = new user_id;
             $user_id ->token = $user_token;
@@ -102,7 +105,12 @@ class LinkController extends Controller
         $curent_click = new Click;
         $curent_click ->user_id = $user_id ->id;
         $curent_click ->link_id = $curent_link ->id;
-        $curent_click ->ip = $request ->ip();
+        if ($curent_ip == '::1')
+        {
+            $curent_click ->ip = '107.0.0.1';
+        }else{
+            $curent_click ->ip = $curent_ip;
+        }
         $curent_click ->save();
 
 

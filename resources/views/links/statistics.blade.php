@@ -10,7 +10,7 @@
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
       <ul class="nav navbar-nav">
-        <li><a href="..\links"><span class="glyphicon glyphicon-list" aria-hidden="false"></span>
+        <li><a href="{{ asset('links') }}"><span class="glyphicon glyphicon-list" aria-hidden="false"></span>
           Ссылки</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span>
           Статистика</a></li>
@@ -80,7 +80,7 @@
 
           @foreach($clicks as $click)
             <tr>
-              <td> {{ $click->created_ad }} </td>
+              <td> {{ $click->created_at }} </td>
               <td><a href="#"> {{ $click->ip }} </a></td>
             </tr>
           @endforeach
