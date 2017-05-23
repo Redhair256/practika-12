@@ -15,10 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/links', 'LinkController@index');
+Route::get('/links', 'LinkController@index')->name('linkLinks');
 
 Route::post('/create', 'LinkController@create');
 
-Route::get('/statistics/{id?}', 'LinkController@view'); 
+Route::get('/statistics/{id?}', 'LinkController@view')->name('linkStatistics');
 
 Route::get('/r/{link_token}', 'LinkController@redirect'); 

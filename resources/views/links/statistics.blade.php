@@ -10,9 +10,9 @@
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
       <ul class="nav navbar-nav">
-        <li><a href="{{ asset('links') }}"><span class="glyphicon glyphicon-list" aria-hidden="false"></span>
+        <li><a href="{{ route('linkLinks') }}"><span class="glyphicon glyphicon-list" aria-hidden="false"></span>
           Ссылки</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span>
+        <li><a href="{{ route('linkStatistics') }}"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span>
           Статистика</a></li>
       </ul>
     </nav>
@@ -28,7 +28,7 @@
 
         @foreach($links as $link)
 
-          <option value="{{ $link->token }}">{{ $link->token }}</option>
+          <option value="{{ route('linkStatistics') }}/{{ $link->token }}">{{ $link->token }}</option>
 
         @endforeach 
 
@@ -36,7 +36,7 @@
         @foreach($links as $link)
 
           @if ( $link->id == $curent_link->id )
-            <option selected value="{{ $link->token}}">{{ $link->token }}</option>
+            <option selected value="{{ $link->token }}">{{ $link->token }}</option>
           @else
             <option value="{{ $link->token }}">{{ $link->token }}</option>
           @endif

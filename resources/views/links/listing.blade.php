@@ -13,10 +13,10 @@
       <!-- Содержимое Navbar -->
          <div class="container">
          <ul class="nav navbar-nav">
-            <li><a href="links"><span class="glyphicon glyphicon-list" aria-hidden="false"></span>
+            <li><a href="{{ route('linkLinks') }}"><span class="glyphicon glyphicon-list" aria-hidden="false"></span>
                Ссылки</a>
             </li>
-            <li><a href="statistics"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span>
+            <li><a href="{{ route('linkStatistics') }}"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span>
                Статистика</a>
             </li>
 
