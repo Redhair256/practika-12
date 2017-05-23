@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersIdTable extends Migration
+class CreateUserIdsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateUsersIdTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_ids', function (Blueprint $table) {
+          Schema::create('user_ids', function (Blueprint $table) {
             $table->increments('id');
             $table->char('token',20); 
-            $table->char('browser', 64); 
+            $table->char('browser', 32); 
             $table->char('os', 32);  
             $table->integer('link_id');
             $table->timestamp('created_at'); 
-            $table->timestamp('updated_at');
         });
     }
 

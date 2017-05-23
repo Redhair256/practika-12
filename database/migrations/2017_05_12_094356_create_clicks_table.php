@@ -17,8 +17,8 @@ class CreateClicksTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('link_id');
-            $table->varchar('ip', 23); 
-            $table->timestamp('created_ad');
+            $table->char('ip', 23); 
+            $table->timestamp('created_at');
         });
     }
 

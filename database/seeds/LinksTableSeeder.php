@@ -21,19 +21,19 @@ class LinksTableSeeder extends Seeder
         Link::create([
             'token' => 'wertyuiopasdfghjklzx',
             'target_url' => 'https://Google.com',
-            'created_ad' => date('Y-m-d H:i:s', $timeRec)
+            'created_at' => date('Y-m-d H:i:s', $timeRec)
         ]);
         $timeRec = $timeRec +10;
         Link::create([
             'token' => 'ertyuiopasdfghjklzxc',
             'target_url' => 'https://Yahoo.com',
-            'created_ad' => date('Y-m-d H:i:s', $timeRec)
+            'created_at' => date('Y-m-d H:i:s', $timeRec)
         ]);
         $timeRec = $timeRec +10;
         Link::create([
             'token' => 'rtyuiopasdfghjklzxcv',
             'target_url' => 'https://Bing.com',
-            'created_ad' => date('Y-m-d H:i:s', $timeRec)
+            'created_at' => date('Y-m-d H:i:s', $timeRec)
         ]);
     }
 }

@@ -17,7 +17,7 @@ class CreateLinksTable extends Migration
             $table->increments('id');
             $table->char('token',20); 
             $table->char('target_url', 255);
-            $table->timestamp('created_ad');
+            $table->timestamp('created_at');
         });
     }
 
