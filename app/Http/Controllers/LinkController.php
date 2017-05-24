@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Jenssegers\Agent\Agent;
 use DB;
+use Log;
 use App\Link;
 use App\Click;
 use App\User_id;
@@ -37,14 +38,15 @@ class LinkController extends Controller
         } while($curent_link != null||$i <4);
         if ($curent_link != null)
         {
-
+            Log::error("Something gone wrong. Link token collision.");
+            return redirect('./links')->withErrors("Не удалось создать уникальный token. Свяжитесь с администратором системы.");
         }else{
             $links = new Link;
             $links->token = $link_token;
             $links->target_url = $request->target_url;  
             $links->save();
+            return redirect('./links')->withErrors("Не удалось создать уникальный token. Свяжитесь с администратором системы.");
         }
-
         return redirect('./links');
     }
 
