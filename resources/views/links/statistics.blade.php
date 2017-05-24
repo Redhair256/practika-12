@@ -35,7 +35,7 @@
       @else
         @foreach($links as $link)
 
-          @if ( $link->id == $curent_link->id )
+          @if ( $link->id == $curent_link)
             <option selected value="{{ $link->token }}">{{ $link->token }}</option>
           @else
             <option value="{{ $link->token }}">{{ $link->token }}</option>

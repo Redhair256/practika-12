@@ -30,23 +30,25 @@ class LinkController extends Controller
         $this->validate($request, [
             'target_url' => 'active_url'
             ]);
+
         $i=0;
         do{
             $i++;
             $link_token =  str_random(20); 
-            $curent_link = Link::where('token', $link_token )->first();
-        } while($curent_link != null||$i <4);
-        if ($curent_link != null)
+            $num_rec = Link::where('token', $link_token )->count();
+        } while($num_rec >0||$i <4);
+
+        if ($num_rec >0)
         {
             Log::error("Something gone wrong. Link token collision.");
-            return redirect('./links')->withErrors("Не удалось создать уникальный token. Свяжитесь с администратором системы.");
-        }else{
-            $links = new Link;
-            $links->token = $link_token;
-            $links->target_url = $request->target_url;  
-            $links->save();
+            return redirect()->withErrors("Не удалось создать уникальный token. Свяжитесь с администратором системы.")->route('linkLinks');
         }
-        return redirect('./links');
+
+        $links = new Link;
+        $links->token = $link_token;
+        $links->target_url = $request->target_url;  
+        $links->save();
+        return redirect()->route('linkLinks');
     }
 
 /**
@@ -58,16 +60,16 @@ class LinkController extends Controller
     public function view($id = '123')
     {
         //
-        $curent_link = Link::where('token', $id )->first();
+        $curent_link_id = Link::where('token', $id )->select('id')->first();
         $links = Link::all();
-        if ($curent_link == null) {
+        if ($curent_link_id == null) {
             $id = '';
-            return view('links.statistics',[ 'links' => $links, 'curent_link' => $curent_link]);
-        }else {
-            $clicks = Click::where('link_id', $curent_link->id )->get();
-            $num_click = $clicks->count();
-            return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);
-        }     
+            return view('links.statistics',[ 'links' => $links, 'curent_link' => $curent_link_id]);
+        }
+
+        $clicks = Click::where('link_id', $curent_link_id )->get();
+        $num_click = $clicks->count();
+        return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link_id, 'num_click' => $num_click ]);   
     }
 
     public function redirect(Request $request, $link_token)
