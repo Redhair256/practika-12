@@ -45,7 +45,6 @@ class LinkController extends Controller
             $links->token = $link_token;
             $links->target_url = $request->target_url;  
             $links->save();
-            return redirect('./links')->withErrors("Не удалось создать уникальный token. Свяжитесь с администратором системы.");
         }
         return redirect('./links');
     }
@@ -68,9 +67,7 @@ class LinkController extends Controller
             $clicks = Click::where('link_id', $curent_link->id )->get();
             $num_click = $clicks->count();
             return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);
-        }
-        
-        
+        }     
     }
 
     public function redirect(Request $request, $link_token)
@@ -92,7 +89,6 @@ class LinkController extends Controller
         }else{
             $user_id = null;
         }
-
         if($user_id == null)
         {
 
@@ -114,8 +110,6 @@ class LinkController extends Controller
             $curent_click ->ip = $curent_ip;
         }
         $curent_click ->save();
-
-
         return redirect($curent_link->target_url)->withCookie(cookie('uid', $user_token));
     }
 }
