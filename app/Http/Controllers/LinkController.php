@@ -36,7 +36,8 @@ class LinkController extends Controller
             $i++;
             $link_token =  str_random(20); 
             $num_rec = Link::where('token', $link_token )->count();
-        } while($num_rec >0||$i <4);
+
+        } while($num_rec >0 && $i <4);
 
         if ($num_rec >0)
         {
@@ -60,16 +61,16 @@ class LinkController extends Controller
     public function view($id = '123')
     {
         //
-        $curent_link_id = Link::where('token', $id )->select('id')->first();
+        $curent_link = Link::where('token', $id )->first();
         $links = Link::all();
-        if ($curent_link_id == null) {
+        if ($curent_link == null) {
             $id = '';
-            return view('links.statistics',[ 'links' => $links, 'curent_link' => $curent_link_id]);
+            return view('links.statistics',[ 'links' => $links, 'curent_link' => $curent_link]);
         }
 
-        $clicks = Click::where('link_id', $curent_link_id )->get();
+        $clicks = Click::where('link_id', $curent_link->id )->get();
         $num_click = $clicks->count();
-        return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link_id, 'num_click' => $num_click ]);   
+        return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);   
     }
 
     public function redirect(Request $request, $link_token)
