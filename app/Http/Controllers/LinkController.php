@@ -105,7 +105,7 @@ class LinkController extends Controller
         $curent_click ->link_id = $curent_link ->id;
         if ($curent_ip == '::1')
         {
-            $curent_click ->ip = '107.0.0.1';
+            $curent_click ->ip = '127.0.0.1';
         }else{
             $curent_click ->ip = $curent_ip;
         }

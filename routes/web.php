@@ -21,4 +21,5 @@ Route::post('/create', 'LinkController@create');
 
 Route::get('/statistics/{id?}', 'LinkController@view')->name('linkStatistics');
 
-Route::get('/r/{link_token}', 'LinkController@redirect'); 
+Route::get('/r/{link_token}', 'LinkController@redirect')->name('linkRedirect');
+ 
