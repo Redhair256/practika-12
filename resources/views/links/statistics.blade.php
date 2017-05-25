@@ -59,7 +59,7 @@
           </thead>
           <tbody>
             <tr>
-              <td align="center"><a href="../r/{{ $curent_link->token }}" target="_blank"><span class="glyphicon glyphicon-link" aria-hidden="false" ></span></a></td>
+              <td align="center"><a href="{{ route('linkRedirect', $curent_link->token ) }}" target="_blank"><span class="glyphicon glyphicon-link" aria-hidden="false" ></span></a></td>
               <td>{{$curent_link->token}}</td>
               <td><a href="{{ $curent_link->target_url }}"> {{ $curent_link->target_url }} </a></td>
               <td align="right"> {{ $num_click }} </td>
