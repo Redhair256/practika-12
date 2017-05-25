@@ -35,7 +35,7 @@ class LinkController extends Controller
         do{
             $i++;
             $link_token =  str_random(20); 
-            $num_rec = Link::where('token', $link_token )->count();
+            $num_rec = Link::where('token', $link_token)->count();
 
         } while($num_rec >0 && $i <4);
 
@@ -60,14 +60,14 @@ class LinkController extends Controller
     public function view($id = '123')
     {
         //
-        $curent_link = Link::where('token', $id )->first();
+        $curent_link = Link::where('token', $id)->first();
         $links = Link::all();
         if ($curent_link == null) {
             $id = '';
             return view('links.statistics',[ 'links' => $links, 'curent_link' => $curent_link]);
         }
 
-        $clicks = Click::where('link_id', $curent_link->id )->get();
+        $clicks = Click::where('link_id', $curent_link->id)->get();
         $num_click = $clicks->count();
         return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);   
     }
@@ -77,16 +77,15 @@ class LinkController extends Controller
         $curent_ip = $request ->ip();
         $agent = new Agent();
         $agent->setUserAgent($request->header('User-Agent')); 
-        $curent_link = Link::where('token', $link_token )->first();
-        if($agent->isRobot())
-        {
+        $curent_link = Link::where('token', $link_token)->first();
+        if($agent->isRobot()){
             return redirect($curent_link->target_url);
         }
 
         $user_token = Cookie::get('uid');
 
         if($user_token != null){
-            $user_id = User_id::where('token', $user_token )->first();
+            $user_id = User_id::where('token', $user_token)->first();
         }else{
             $user_id = null;
         }
@@ -103,8 +102,7 @@ class LinkController extends Controller
         $curent_click = new Click;
         $curent_click ->user_id = $user_id ->id;
         $curent_click ->link_id = $curent_link ->id;
-        if ($curent_ip == '::1')
-        {
+        if ($curent_ip == '::1'){
             $curent_click ->ip = '127.0.0.1';
         }else{
             $curent_click ->ip = $curent_ip;
