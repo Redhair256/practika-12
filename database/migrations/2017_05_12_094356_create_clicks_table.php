@@ -13,11 +13,14 @@ class CreateClicksTable extends Migration
      */
     public function up()
     {
-        Schema::create('clicks', function (Blueprint $table) {
+        Schema::create('clicks', function (Blueprint $table) 
+        {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('link_id');
             $table->char('ip', 23); 
+            $table->char('user_token', 20);
+            $table->char('user_ua', 255);
             $table->timestamp('created_at');
         });
     }

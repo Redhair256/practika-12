@@ -73,7 +73,9 @@
           <thead> 
             <tr>
               <th width=290><b> Время перехода </b></th>
-              <th><b> ip Пользователя </b></th>
+              <th width=180><b> ip Пользователя </b></th>
+              <th width=180><b> id Пользователя </b></th>
+              <th><b> User-Agent Пользователя </b></th>
            </tr>
           </thead>
           <tbody>
@@ -81,7 +83,9 @@
           @foreach($clicks as $click)
             <tr>
               <td> {{ $click->created_at }} </td>
-              <td><a href="#"> {{ $click->ip }} </a></td>
+              <td> {{ $click->ip }} </td>
+              <td><a href="#"> {{ $click->user_token }} </a></td>
+              <td> {{ $click->user_ua }} </td>
             </tr>
           @endforeach
 

@@ -39,8 +39,7 @@ class LinkController extends Controller
 
         } while($num_rec >0 && $i <4);
 
-        if ($num_rec >0)
-        {
+        if ($num_rec >0){
             Log::error("Something gone wrong. Link token collision.");
             return redirect()->withErrors("Не удалось создать уникальный token. Свяжитесь с администратором системы.")->route('linkLinks');
         }
@@ -86,14 +85,12 @@ class LinkController extends Controller
 
         $user_token = Cookie::get('uid');
 
-        if($user_token != null)
-        {
+        if($user_token != null){
             $user_id = User_id::where('token', $user_token )->first();
         }else{
             $user_id = null;
         }
-        if($user_id == null)
-        {
+        if($user_id == null){
 
             $user_token = str_random(20);
             $user_id = new user_id;
@@ -112,6 +109,8 @@ class LinkController extends Controller
         }else{
             $curent_click ->ip = $curent_ip;
         }
+        $curent_click ->user_token = $user_id ->token;
+        $curent_click ->user_ua = $request->header('User-Agent');
         $curent_click ->save();
         return redirect($curent_link->target_url)->withCookie(cookie('uid', $user_token));
     }

@@ -14,14 +14,14 @@ class UserIdsTableSeeder extends Seeder
         //
                 $timeRec = time();
         User_id::create([
-            'token' => str_random(20),
+            'token' => '6gYxaB3VHiznHyZm0UkO',
             'browser' => 'Google Chrome',
             'os' => 'Windows7',
             'link_id' => 2,
          ]);
         $timeRec = $timeRec +10;
         User_id::create([
-            'token' => str_random(20),
+            'token' => 'LoZNrlxT2aB386wv27js',
             'browser' => 'Mozilla Firefox',
             'os' => 'Windows8',
             'link_id' => 2,
