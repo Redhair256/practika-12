@@ -13,7 +13,8 @@
         <li><a href="{{ route('linkLinks') }}"><span class="glyphicon glyphicon-list" aria-hidden="false"></span>
           Ссылки</a></li>
         <li><a href="{{ route('linkStatistics') }}"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span>
-          Статистика</a></li>
+          Статистика переходов</a></li>
+        <li><a href="{{ route('linkUsers') }}"><span class="glyphicon glyphicon-user" aria-hidden="false"></span> Сисок пользователей</a></li>
       </ul>
     </nav>
 
@@ -59,7 +60,7 @@
           </thead>
           <tbody>
             <tr>
-              <td align="center"><a href="{{ route('linkRedirect', $curent_link->token ) }}" target="_blank"><span class="glyphicon glyphicon-link" aria-hidden="false" ></span></a></td>
+              <td align="center"><a href="{{ route('linkRedirect', $curent_link->token ) }} " target="_blank"><span class="glyphicon glyphicon-link" aria-hidden="false" ></span></a></td>
               <td>{{$curent_link->token}}</td>
               <td><a href="{{ $curent_link->target_url }}"> {{ $curent_link->target_url }} </a></td>
               <td align="right"> {{ $num_click }} </td>
@@ -84,7 +85,7 @@
             <tr>
               <td> {{ $click->created_at }} </td>
               <td> {{ $click->ip }} </td>
-              <td><a href="#"> {{ $click->user_token }} </a></td>
+              <td><a href="{{ route('linkUsers', $click->user_id) }}"> {{ $click->user_token }} </a></td>
               <td> {{ $click->user_ua }} </td>
             </tr>
           @endforeach

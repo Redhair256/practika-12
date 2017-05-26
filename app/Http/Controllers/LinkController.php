@@ -57,7 +57,7 @@ class LinkController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function view($id = '123')
+    public function viewStat($id = '123')
     {
         //
         $curent_link = Link::where('token', $id)->first();
@@ -70,6 +70,14 @@ class LinkController extends Controller
         $clicks = Click::where('link_id', $curent_link->id)->get();
         $num_click = $clicks->count();
         return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);   
+    }
+
+    public function viewUsers($id = '0')
+    {
+        //
+        $users = User_id::all();
+    
+        return view('links.users',[ 'users' => $users, 'user_id' => $id] );
     }
 
     public function redirect(Request $request, $link_token)

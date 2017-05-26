@@ -19,7 +19,10 @@ Route::get('/links', 'LinkController@index')->name('linkLinks');
 
 Route::post('/create', 'LinkController@create');
 
-Route::get('/statistics/{id?}', 'LinkController@view')->name('linkStatistics');
+Route::get('/statistics/{id?}', 'LinkController@viewStat')->name('linkStatistics');
 
 Route::get('/r/{link_token}', 'LinkController@redirect')->name('linkRedirect');
  
+Route::get('/users{id?}', 'LinkController@viewUsers')->name('linkUsers');
+
+//Route::get('/user/{id?}', 'LinkController@viewUserStat')->name('linkUsersStat');
