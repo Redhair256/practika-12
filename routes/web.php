@@ -25,4 +25,4 @@ Route::get('/r/{link_token}', 'LinkController@redirect')->name('linkRedirect');
  
 Route::get('/users{id?}', 'LinkController@viewUsers')->name('linkUsers');
 
-//Route::get('/user/{id?}', 'LinkController@viewUserStat')->name('linkUsersStat');
+Route::get('/user/{id?}', 'LinkController@viewUserStat')->name('linkUserStat');

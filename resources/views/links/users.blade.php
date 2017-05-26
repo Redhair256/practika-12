@@ -12,7 +12,9 @@
       <ul class="nav navbar-nav">
         <li><a href="{{ route('linkLinks') }}"><span class="glyphicon glyphicon-list" aria-hidden="false"></span> Ссылки</a></li>
         <li><a href="{{ route('linkStatistics') }}"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span> Статистика переходов</a></li>
-        <li><a href="{{ route('linkUsers') }}"><span class="glyphicon glyphicon-user" aria-hidden="false"></span> Сисок пользователей</a></li>
+        <li><a href="{{ route('linkUsers') }}"><span class="glyphicon glyphicon-user" aria-hidden="false"></span> Список пользователей</a></li>
+        <li><a href="{{ route('linkUserStat') }}"><span class="glyphicon glyphicon-equalizer" aria-hidden="false"></span> Статистика пользователей</a></li>
+
       </ul>
     </nav>
 
@@ -23,9 +25,9 @@
           <thead> 
             <tr>
               <th width=40 class="text-center"><span class="glyphicon glyphicon-th-list" aria-hidden="false"></span></th>
-              <th width=180><b> id Пользователя </b></th>
-              <th width=180><b> Браузер Пользователя </b></th>
-              <th width=180><b> ОС Пользователя </b></th>
+              <th width=200><b> id Пользователя </b></th>
+              <th width=200><b> Браузер Пользователя </b></th>
+              <th width=200><b> ОС Пользователя </b></th>
               <th><b> Дата и время создания </b></th>
            </tr>
           </thead>
@@ -33,12 +35,12 @@
         @if ( $user_id != null )
           @foreach($users as $user)
             @if ( $user_id  == $user->id)  
-              <tr bgcolor="lightgrey">
+              <tr bgcolor="lightgreen">
             @else
               <tr>
             @endif
               <th width=40 class="text-center"><span class="glyphicon glyphicon-user" aria-hidden="false"></span></th>
-              <td><a href="#"> {{ $user->token }} </a></td>
+              <td><a href="{{ route('linkUserStat', $user->token) }}"> {{ $user->token }} </a></td>
               <td> {{ $user->browser }} </td>
               <td> {{ $user->os }} </td>
               <td> {{ $user->created_at }} </td>

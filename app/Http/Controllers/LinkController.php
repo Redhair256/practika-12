@@ -77,7 +77,23 @@ class LinkController extends Controller
         //
         $users = User_id::all();
     
-        return view('links.users',[ 'users' => $users, 'user_id' => $id] );
+        return view('links.users',[ 'users' => $users, 'user_id' => $id ] );
+    }
+
+    public function viewUserStat($id = '0')
+    {
+        //
+        if ($id != '0'){
+            $curent_user = User_id::where('token', $id)->first();
+            $clicks = Click::where('user_id', $curent_user->id)->get();
+            $num_link = $clicks->count();
+        }else{
+            $curent_user = null;
+            $clicks = null;
+            $num_link = 0;
+        }
+        $users = User_id::all(['id', 'token']);
+        return view('links.userstat', [ 'users' => $users, 'curent_user' => $curent_user, 'clicks' => $clicks, 'num_link' => $num_link ] );
     }
 
     public function redirect(Request $request, $link_token)
@@ -108,8 +124,9 @@ class LinkController extends Controller
             $user_id ->save();
         }
         $curent_click = new Click;
-        $curent_click ->user_id = $user_id ->id;
         $curent_click ->link_id = $curent_link ->id;
+        $curent_click ->link_url = $curent_link ->target_url;
+        $curent_click ->user_id = $user_id ->id;
         if ($curent_ip == '::1'){
             $curent_click ->ip = '127.0.0.1';
         }else{

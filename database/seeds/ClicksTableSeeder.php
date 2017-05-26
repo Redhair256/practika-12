@@ -16,6 +16,7 @@ class ClicksTableSeeder extends Seeder
         $timeRec = time();
         Click::create([
 			'link_id' => 2,
+            'link_url' => 'https://Google.com',
 			'user_id' => 1,
             'ip' => '127.0.0.1',
             'user_token' => '6gYxaB3VHiznHyZm0UkO',
@@ -24,6 +25,7 @@ class ClicksTableSeeder extends Seeder
         $timeRec = $timeRec +10;
         Click::create([
 			'link_id' => 2,
+            'link_url' => 'https://Google.com',
 			'user_id' => 1,
             'ip' => '127.0.0.1',
             'user_token' => '6gYxaB3VHiznHyZm0UkO',
@@ -33,6 +35,7 @@ class ClicksTableSeeder extends Seeder
         $timeRec = $timeRec +10;
         Click::create([
 			'link_id' => 3,
+            'link_url' => 'https://Yahoo.com',
 			'user_id' => 2,
             'ip' => '127.0.0.1',
             'user_token' => 'LoZNrlxT2aB386wv27js',
@@ -42,6 +45,7 @@ class ClicksTableSeeder extends Seeder
         $timeRec = $timeRec +10;
         Click::create([
 			'link_id' => 2,
+            'link_url' => 'https://Google.com',
 			'user_id' => 1,
             'ip' => '127.0.0.1',
             'user_token' => '6gYxaB3VHiznHyZm0UkO',

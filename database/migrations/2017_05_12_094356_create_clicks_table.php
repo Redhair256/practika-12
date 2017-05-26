@@ -16,8 +16,9 @@ class CreateClicksTable extends Migration
         Schema::create('clicks', function (Blueprint $table) 
         {
             $table->increments('id');
-            $table->integer('user_id');
             $table->integer('link_id');
+            $table->char('link_url', 255);
+            $table->integer('user_id');
             $table->char('ip', 23); 
             $table->char('user_token', 20);
             $table->char('user_ua', 255);
