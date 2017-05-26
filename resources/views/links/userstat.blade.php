@@ -18,6 +18,7 @@
     </nav>
 
     <div class="container">
+    <h4>Выберите Пользователя</h4>
     @if ( $curent_user != null )
       <div class="input-group input-group-lg">
         <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user" aria-hidden="false"></span></span>
