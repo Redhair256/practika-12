@@ -60,6 +60,14 @@
                </tr>
             </thead>
             <tbody>
+               @if($links->currentPage() != 1)
+               <tr>
+                  <td align="center"><span class="glyphicon glyphicon-link" aria-hidden="false" ></span></td>
+                  <td> ... </td>
+                  <td> ... </td>
+                  <td align="center"><a href="statistics/01"><span class="glyphicon glyphicon-eye-open" aria-hidden="false"></span></a></td>
+               </tr>
+               @endif
                @foreach($links as $link)
                   <tr>
                   <td align='center'><a href='r/{{ $link->token }}' target="_blank"><span class='glyphicon glyphicon-link' aria-hidden='false'></span></a></td>
@@ -67,17 +75,18 @@
                   <td><a href='{{ $link->target_url}}'>{{ $link->target_url}}</a></td>
                   <td align='center'><a href='statistics/{{ $link->token}}'><span class='glyphicon glyphicon-eye-open' aria-hidden='false'></span></a></td>
                   </tr>
-                @endforeach  
-
+               @endforeach  
+               @if($links->currentPage() != $links->lastPage())
                <tr>
-                  <td align="center"><a href="#"><span class="glyphicon glyphicon-link" aria-hidden="false" ></span></a></td>
-                  <td>...</td>
-                  <td><a href="#"> ... </a></td>
+                  <td align="center"><span class="glyphicon glyphicon-link" aria-hidden="false" ></span></td>
+                  <td> ... </td>
+                  <td> ... </td>
                   <td align="center"><a href="statistics/01"><span class="glyphicon glyphicon-eye-open" aria-hidden="false"></span></a></td>
                </tr>
-    
+               @endif
             </tbody>
          </table>
+         <?php echo $links->render(); ?>
       </div>
       <script type="text/javascript" src={{ asset('vendor/components/jquery/jquery.min.js') }}></script>
       <script type="text/javascript" src={{ asset('vendor/twbs/bootstrap/dist/js/bootstrap.min.js') }}></script>    

@@ -59,7 +59,7 @@
         @endif
         </tbody>
       </table> 
-
+      <?php echo $users->render(); ?>
     </div>
     <script type="text/javascript" src= {{ asset('vendor/components/jquery/jquery.min.js') }} ></script>
     <script type="text/javascript" src= {{ asset('vendor/twbs/bootstrap/dist/js/bootstrap.min.js') }} ></script>    

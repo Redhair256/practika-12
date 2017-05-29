@@ -86,6 +86,7 @@
 
           </tbody>
         </table> 
+        <?php echo $clicks->render(); ?>
     @else
       <div class="input-group input-group-lg">
         <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user" aria-hidden="false"></span></span>
@@ -99,7 +100,6 @@
           @endforeach 
 
         </select>
-
       </div>
 
     @endif

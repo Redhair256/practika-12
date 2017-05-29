@@ -21,7 +21,7 @@ class LinkController extends Controller
     public function index()
     {
         //
-        $links = Link::all();
+        $links = Link::orderBy('id', 'desc')->paginate(2);
         return view('links.listing', [ 'links' => $links ]);
 
     }
@@ -61,13 +61,13 @@ class LinkController extends Controller
     {
         //
         $curent_link = Link::where('token', $id)->first();
-        $links = Link::all();
+        $links = Link::orderBy('id', 'desc')->get();
         if ($curent_link == null) {
             $id = '';
             return view('links.statistics',[ 'links' => $links, 'curent_link' => $curent_link]);
         }
 
-        $clicks = Click::where('link_id', $curent_link->id)->get();
+        $clicks = Click::where('link_id', $curent_link->id)->orderBy('id', 'desc')->paginate(2);
         $num_click = $clicks->count();
         return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);   
     }
@@ -75,7 +75,7 @@ class LinkController extends Controller
     public function viewUsers($id = '0')
     {
         //
-        $users = User_id::all();
+        $users = User_id::orderBy('id', 'desc')->paginate(2);
     
         return view('links.users',[ 'users' => $users, 'user_id' => $id ] );
     }
@@ -85,14 +85,14 @@ class LinkController extends Controller
         //
         if ($id != '0'){
             $curent_user = User_id::where('token', $id)->first();
-            $clicks = Click::where('user_id', $curent_user->id)->get();
-            $num_link = $clicks->count();
+            $clicks = Click::where('user_id', $curent_user->id)->orderBy('id', 'desc')->paginate(2);
+            $num_link = Click::where('user_id', $curent_user->id)->count();
         }else{
             $curent_user = null;
             $clicks = null;
             $num_link = 0;
         }
-        $users = User_id::all(['id', 'token']);
+        $users = User_id::orderBy('id', 'desc')->get(['id', 'token']);
         return view('links.userstat', [ 'users' => $users, 'curent_user' => $curent_user, 'clicks' => $clicks, 'num_link' => $num_link ] );
     }
 

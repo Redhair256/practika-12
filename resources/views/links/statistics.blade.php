@@ -93,6 +93,7 @@
 
           </tbody>
         </table> 
+        <?php echo $clicks->render(); ?>
       @endif
     </div>
     <script type="text/javascript" src= {{ asset('vendor/components/jquery/jquery.min.js') }} ></script>
