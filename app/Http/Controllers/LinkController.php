@@ -13,6 +13,7 @@ use App\User_id;
 
 class LinkController extends Controller
 {
+    var $stringsPerPage = 2;
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +21,9 @@ class LinkController extends Controller
      */
     public function index()
     {
+        global $stringsPerPage;
         //
-        $links = Link::orderBy('id', 'desc')->paginate(2);
+        $links = Link::orderBy('created_at', 'desc')->paginate($stringsPerPage);
         return view('links.listing', [ 'links' => $links ]);
 
     }
@@ -59,40 +61,44 @@ class LinkController extends Controller
 
     public function viewStat($id = '123')
     {
+        global $stringsPerPage;
         //
         $curent_link = Link::where('token', $id)->first();
-        $links = Link::orderBy('id', 'desc')->get();
+        $links = Link::orderBy('created_at', 'desc')->get();
         if ($curent_link == null) {
             $id = '';
             return view('links.statistics',[ 'links' => $links, 'curent_link' => $curent_link]);
         }
 
-        $clicks = Click::where('link_id', $curent_link->id)->orderBy('id', 'desc')->paginate(2);
+        $clicks = Click::where('link_id', $curent_link->id)->orderBy('created_at', 'desc')->paginate($stringsPerPage);
         $num_click = $clicks->count();
         return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);   
     }
 
     public function viewUsers($id = '0')
     {
+        global $stringsPerPage;
         //
-        $users = User_id::orderBy('id', 'desc')->paginate(2);
+        $users = User_id::orderBy('created_at', 'desc')->paginate($stringsPerPage);
     
         return view('links.users',[ 'users' => $users, 'user_id' => $id ] );
     }
 
     public function viewUserStat($id = '0')
     {
+        global $stringsPerPage;
         //
         if ($id != '0'){
             $curent_user = User_id::where('token', $id)->first();
-            $clicks = Click::where('user_id', $curent_user->id)->orderBy('id', 'desc')->paginate(2);
+            $clicks = Click::where('user_id', $curent_user->id)->orderBy('created_at', 'desc')
+            ->paginate($stringsPerPage);
             $num_link = Click::where('user_id', $curent_user->id)->count();
         }else{
             $curent_user = null;
             $clicks = null;
             $num_link = 0;
         }
-        $users = User_id::orderBy('id', 'desc')->get(['id', 'token']);
+        $users = User_id::orderBy('created_at', 'desc')->get(['id', 'token']);
         return view('links.userstat', [ 'users' => $users, 'curent_user' => $curent_user, 'clicks' => $clicks, 'num_link' => $num_link ] );
     }
 
