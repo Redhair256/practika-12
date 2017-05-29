@@ -13,7 +13,7 @@ use App\User_id;
 
 class LinkController extends Controller
 {
-    protected $stringsPerPage = 2;
+    protected $stringsPerPage = 5;
     /**
      * Display a listing of the resource.
      *
