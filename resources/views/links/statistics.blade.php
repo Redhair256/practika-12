@@ -10,6 +10,8 @@
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
       <ul class="nav navbar-nav">
+        <li><a href="{{ route('home') }}"><span class="glyphicon glyphicon-home" aria-hidden="false"></span>
+          </a></li>
         <li><a href="{{ route('linkLinks') }}"><span class="glyphicon glyphicon-list" aria-hidden="false"></span>
           Ссылки</a></li>
         <li><a href="{{ route('linkStatistics') }}"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span>

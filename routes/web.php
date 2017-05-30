@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/links', 'LinkController@index')->name('linkLinks');
+Route::get('/', 'LinkController@index')->name('home');
+
+Route::get('/links', 'LinkController@viewLinks')->name('linkLinks');
 
 Route::post('/create', 'LinkController@create');
 

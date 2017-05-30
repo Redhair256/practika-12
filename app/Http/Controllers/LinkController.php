@@ -21,11 +21,33 @@ class LinkController extends Controller
      */
     public function index()
     {
+        $numLinks = Link::all()->count();
+        $numClicks = Click::all()->count();
+        $averClicks = $numClicks/$numLinks;
+        $users = User_id::all()->count();
+        $toDay = date("d,m,y");
+        $tdClicks = Click::where('created_at', '>=', $toDay)->count();
+        $tdLinks = Link::where('created_at', '>=', $toDay)->count();
+        $tdUsers = User_id::where('created_at', '>=', $toDay)->count();
+
+        return view('links.index', [ 'numLinks' => $numLinks, 
+                                     'numClicks' => $numClicks,
+                                     'averClicks' => $averClicks, 
+                                     'users' => $users, 
+                                     'tdClicks' => $tdClicks, 
+                                     'tdLinks' => $tdLinks, 
+                                     'tdUsers' => $tdUsers 
+                                     ]);
+    }
+
+    public function viewLinks()
+    {
         //
         $links = Link::orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
         return view('links.listing', [ 'links' => $links ]);
 
     }
+
     public function create(Request $request)
     {
         $this->validate($request, [
