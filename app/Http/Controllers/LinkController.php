@@ -25,21 +25,21 @@ class LinkController extends Controller
         $numLinks = Link::all()->count();
         $numClicks = Click::all()->count();
         $averClicks = $numClicks/$numLinks;
-        $users = Click::groupBy('user_id', 'link_id')->count();
+        $uniqClicks = Click::groupBy('user_id', 'link_id')->count();
         $today = Carbon::now();
         $startOfDay = $today->copy()->startOfDay();
         $endOfDay = $today->copy()->endOfDay();
         $tdClicks = Click::whereBetween('created_at', array($startOfDay, $endOfDay))->count();
         $tdLinks = Link::whereBetween('created_at', array($startOfDay, $endOfDay))->count();
-        $tdUsers = User_id::whereBetween('created_at', array($startOfDay, $endOfDay))->count();
+        $uniqClicks = User_id::whereBetween('created_at', array($startOfDay, $endOfDay))->count();
 
         return view('links.index', [ 'numLinks' => $numLinks, 
                                      'numClicks' => $numClicks,
                                      'averClicks' => $averClicks, 
-                                     'users' => $users, 
+                                     'uniqClicks' => $uniqClicks, 
                                      'tdClicks' => $tdClicks, 
                                      'tdLinks' => $tdLinks, 
-                                     'tdUsers' => $tdUsers 
+                                     'tdUniqClicks' => $tdUniqClicks 
                                      ]);
     }
 
