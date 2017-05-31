@@ -26,9 +26,9 @@ class LinkController extends Controller
         $averClicks = $numClicks/$numLinks;
         $users = User_id::all()->count();
         $toDay = date("d,m,y");
-        $tdClicks = Click::where('created_at', '>=', $toDay)->count();
-        $tdLinks = Link::where('created_at', '>=', $toDay)->count();
-        $tdUsers = User_id::where('created_at', '>=', $toDay)->count();
+        $tdClicks = Click::whereBetween('created_at', array($toDay, $toDay))->count();
+        $tdLinks = Link::whereBetween('created_at', array($toDay, $toDay))->count();
+        $tdUsers = User_id::whereBetween('created_at', array($toDay, $toDay))->count();
 
         return view('links.index', [ 'numLinks' => $numLinks, 
                                      'numClicks' => $numClicks,
