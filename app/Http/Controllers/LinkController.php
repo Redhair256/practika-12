@@ -10,6 +10,7 @@ use Log;
 use App\Link;
 use App\Click;
 use App\User_id;
+use Carbon\Carbon;
 
 class LinkController extends Controller
 {
@@ -24,11 +25,13 @@ class LinkController extends Controller
         $numLinks = Link::all()->count();
         $numClicks = Click::all()->count();
         $averClicks = $numClicks/$numLinks;
-        $users = User_id::all()->count();
-        $toDay = date("d,m,y");
-        $tdClicks = Click::whereBetween('created_at', array($toDay, $toDay))->count();
-        $tdLinks = Link::whereBetween('created_at', array($toDay, $toDay))->count();
-        $tdUsers = User_id::whereBetween('created_at', array($toDay, $toDay))->count();
+        $users = Click::groupBy('user_id', 'link_id')->count();
+        $today = Carbon::now();
+        $startOfDay = $today->copy()->startOfDay();
+        $endOfDay = $today->copy()->endOfDay();
+        $tdClicks = Click::whereBetween('created_at', array($startOfDay, $endOfDay))->count();
+        $tdLinks = Link::whereBetween('created_at', array($startOfDay, $endOfDay))->count();
+        $tdUsers = User_id::whereBetween('created_at', array($startOfDay, $endOfDay))->count();
 
         return view('links.index', [ 'numLinks' => $numLinks, 
                                      'numClicks' => $numClicks,
