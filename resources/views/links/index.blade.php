@@ -34,7 +34,7 @@
           </thead>
           <tbody>
             <th width=40 class="text-center"><span class="glyphicon glyphicon-asterisk" aria-hidden="false"></span></th>
-            @if($tdLinks == null)
+            @if($numLinks == null)
               <th><b> Нет информации. </b></th>
             @else
               <th><b> {{ $numLinks }} </b></th>
