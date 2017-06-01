@@ -39,20 +39,20 @@
             @else
               <th><b> {{ $numLinks }} </b></th>
             @endif
-            @if($tdLinks == null)
+            @if($numClicks == null)
               <th><b> Нет информации. </b></th>
             @else
               <th><b> {{ $numClicks }} </b></th>
             @endif
-            @if($tdLinks == null)
+            @if($averClicks == null)
               <th><b> Нет информации. </b></th>
             @else
               <th><b> {{ $averClicks }} </b></th>
             @endif
-            @if($tdLinks == null)
+            @if($numUniqClicks == null)
               <th><b> Нет информации. </b></th>
             @else
-              <th><b> {{ $users}} </b></th>
+              <th><b> {{ $numUniqClicks}} </b></th>
             @endif
         </tbody>
       </table> 
@@ -80,15 +80,10 @@
             @else
               <th><b> {{ $tdClicks }} </b></th>
             @endif
-            @if($tdUsers == null)
+            @if($numTdUniqClicks == null)
               <th><b> Нет информации. </b></th>
             @else
-              <th><b> {{ $tdUsers }} </b></th>
-            @endif
-            @if($tdUsers == null)
-              <th><b> Нет информации. </b></th>
-            @else
-              <th><b> {{ $tdUsers }} </b></th>
+              <th><b> {{ $numTdUniqClicks }} </b></th>
             @endif
 
         </tbody>
