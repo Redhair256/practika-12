@@ -22,18 +22,23 @@ class LinkController extends Controller
      */
     public function index()
     {
+//      !!! При использовании groupBy обязательно установить
+//      'strict' => false, в настройках mysql (database.php)
+//
         $numLinks = Link::all()->count();
         $numClicks = Click::all()->count();
         $averClicks = $numClicks/$numLinks;
-        $uniqClicks = Click::groupBy('user_id', 'link_id')->get();
+        $uniqClicks = Click::groupBy('user_id', 'link_id')->select('id')->get();
         $numUniqClicks = $uniqClicks->count();
         $today = Carbon::now();
         $startOfDay = $today->copy()->startOfDay();
         $endOfDay = $today->copy()->endOfDay();
         $tdClicks = Click::whereBetween('created_at', array($startOfDay, $endOfDay))->count();
         $tdLinks = Link::whereBetween('created_at', array($startOfDay, $endOfDay))->count();
-        $tdUniqClicks = Click::whereBetween('created_at', array($startOfDay, $endOfDay))->groupBy('user_id', 'link_id')->get();
-        $numTdUniqClicks = $tdUniqClicks->count();
+        $tdUniqClicks = Click::whereBetween('created_at', array($startOfDay, $endOfDay))->groupBy('user_id', 'link_id')->select('id')->get();
+        $tdNumUniqClicks = $tdUniqClicks->count();
+        $tdAverClicks = $tdClicks/$numLinks;
+
 
         return view('links.index', [ 'numLinks' => $numLinks, 
                                      'numClicks' => $numClicks,
@@ -41,7 +46,8 @@ class LinkController extends Controller
                                      'numUniqClicks' => $numUniqClicks, 
                                      'tdClicks' => $tdClicks, 
                                      'tdLinks' => $tdLinks, 
-                                     'numTdUniqClicks' => $numTdUniqClicks 
+                                     'tdNumUniqClicks' => $tdNumUniqClicks, 
+                                     'tdAverClicks' => $tdAverClicks
                                      ]);
     }
 

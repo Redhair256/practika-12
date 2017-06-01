@@ -10,7 +10,7 @@
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
       <ul class="nav navbar-nav">
-        <li><a href="{{ route('linkLinks') }}"><span class="glyphicon glyphicon-home" aria-hidden="false"></span></a></li>
+        <li><a href="{{ route('home') }}"><span class="glyphicon glyphicon-home" aria-hidden="false"></span></a></li>
         <li><a href="{{ route('linkLinks') }}"><span class="glyphicon glyphicon-list" aria-hidden="false"></span> Ссылки</a></li>
         <li><a href="{{ route('linkStatistics') }}"><span class="glyphicon glyphicon-stats" aria-hidden="false"></span> Статистика переходов</a></li>
         <li><a href="{{ route('linkUsers') }}"><span class="glyphicon glyphicon-user" aria-hidden="false"></span> Список пользователей</a></li>
@@ -80,10 +80,15 @@
             @else
               <th><b> {{ $tdClicks }} </b></th>
             @endif
-            @if($numTdUniqClicks == null)
+            @if($tdNumUniqClicks == null)
               <th><b> Нет информации. </b></th>
             @else
-              <th><b> {{ $numTdUniqClicks }} </b></th>
+              <th><b> {{ $tdNumUniqClicks }} </b></th>
+            @endif
+            @if($tdAverClicks == null)
+              <th><b> Нет информации. </b></th>
+            @else
+              <th><b> {{ $tdAverClicks }} </b></th>
             @endif
 
         </tbody>
