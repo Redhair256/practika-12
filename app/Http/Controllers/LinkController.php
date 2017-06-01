@@ -39,10 +39,9 @@ class LinkController extends Controller
                                      'numClicks' => $numClicks,
                                      'averClicks' => $averClicks, 
                                      'numUniqClicks' => $numUniqClicks, 
-                                     'uniqClicks' => $uniqClicks, 
                                      'tdClicks' => $tdClicks, 
                                      'tdLinks' => $tdLinks, 
-                                     'numTdUniqClicks' => $tdUniqClicks 
+                                     'numTdUniqClicks' => $numTdUniqClicks 
                                      ]);
     }
 
