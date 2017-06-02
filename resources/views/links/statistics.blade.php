@@ -88,8 +88,8 @@
             <tr>
               <td> {{ $click->created_at }} </td>
               <td> {{ $click->ip }} </td>
-              <td><a href="{{ route('linkUsers', $click->user_id) }}"> {{ $click->user_token }} </a></td>
-              <td> {{ $click->user_ua }} </td>
+              <td><a href="{{ route('linkUsers', $click->user_id) }}"> {{ $click->visitor_token }} </a></td>
+              <td> {{ $click->visitor_ua }} </td>
             </tr>
           @endforeach
 

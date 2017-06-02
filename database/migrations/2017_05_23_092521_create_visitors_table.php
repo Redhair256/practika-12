@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClicksTable extends Migration
+class CreateVisitorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateClicksTable extends Migration
      */
     public function up()
     {
-        Schema::create('clicks', function (Blueprint $table) 
-        {
+          Schema::create('Visitors', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('token',20); 
+            $table->char('browser', 32); 
+            $table->char('os', 32);  
             $table->integer('link_id');
-            $table->char('link_url', 255);
-            $table->integer('visitor_id');
-            $table->char('ip', 23); 
-            $table->char('visitor_token', 20);
-            $table->char('visitor_ua', 255);
-            $table->timestamp('created_at');
+            $table->timestamp('created_at'); 
         });
     }
 
@@ -33,6 +30,6 @@ class CreateClicksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clicks');
+        Schema::dropIfExists('Visitors');
     }
 }

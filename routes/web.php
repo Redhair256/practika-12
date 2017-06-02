@@ -12,16 +12,21 @@
 */
 
 
-Route::get('/', 'LinkController@index')->name('home');
-
 Route::get('/links', 'LinkController@viewLinks')->name('linkLinks');
 
 Route::post('/create', 'LinkController@create');
 
-Route::get('/statistics/{id?}', 'LinkController@viewStat')->name('linkStatistics');
-
 Route::get('/r/{link_token}', 'LinkController@redirect')->name('linkRedirect');
- 
-Route::get('/users{id?}', 'LinkController@viewUsers')->name('linkUsers');
 
-Route::get('/user/{id?}', 'LinkController@viewUserStat')->name('linkUserStat');
+
+
+
+Route::get('/', 'StatisticController@index')->name('home');
+
+Route::get('/statistics/{id?}', 'StatisticController@viewStat')->name('linkStatistics');
+
+ 
+Route::get('/users{id?}', 'VisitorController@viewUsers')->name('linkUsers');
+
+
+Route::get('/user/{id?}', 'VisitorController@viewUserStat')->name('linkUserStat');
