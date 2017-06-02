@@ -9,7 +9,7 @@ use DB;
 use Log;
 use App\Link;
 use App\Click;
-use App\User_id;
+use App\Visitor;
 use Carbon\Carbon;
 
 class VisitorController extends Controller
@@ -24,26 +24,26 @@ class VisitorController extends Controller
     public function viewUsers($id = '0')
     {
         //
-        $users = User_id::orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
+        $visitors = Visitor::orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
     
-        return view('links.users',[ 'users' => $users, 'user_id' => $id ] );
+        return view('links.users',[ 'visitors' => $visitors, 'visitor_id' => $id ] );
     }
 
     public function viewUserStat($id = '0')
     {
         //
         if ($id != '0'){
-            $curent_user = User_id::where('token', $id)->first();
-            $clicks = Click::where('user_id', $curent_user->id)->orderBy('created_at', 'desc')
+            $curent_visitor = Visitor::where('token', $id)->first();
+            $clicks = Click::where('visitor_id', $curent_visitor->id)->orderBy('created_at', 'desc')
             ->paginate($this->stringsPerPage);
-            $num_link = Click::where('user_id', $curent_user->id)->count();
+            $num_link = Click::where('visitor_id', $curent_visitor->id)->count();
         }else{
-            $curent_user = null;
+            $curent_visitor = null;
             $clicks = null;
             $num_link = 0;
         }
-        $users = User_id::orderBy('created_at', 'desc')->get(['id', 'token']);
-        return view('links.userstat', [ 'users' => $users, 'curent_user' => $curent_user, 'clicks' => $clicks, 'num_link' => $num_link ] );
+        $visitors = Visitor::orderBy('created_at', 'desc')->get(['id', 'token']);
+        return view('links.userstat', [ 'visitors' => $visitors, 'curent_visitor' => $curent_visitor, 'clicks' => $clicks, 'num_link' => $num_link ] );
     }
 
     public function redirect(Request $request, $link_token)
@@ -56,35 +56,35 @@ class VisitorController extends Controller
             return redirect($curent_link->target_url);
         }
 
-        $user_token = Cookie::get('uid');
+        $visitor_token = Cookie::get('uid');
 
-        if($user_token != null){
-            $user_id = User_id::where('token', $user_token)->first();
+        if($visitor_token != null){
+            $visitor = Visitor::where('token', $visitor_token)->first();
         }else{
-            $user_id = null;
+            $visitor = null;
         }
-        if($user_id == null){
+        if($visitor == null){
 
-            $user_token = str_random(20);
-            $user_id = new user_id;
-            $user_id ->token = $user_token;
-            $user_id ->browser = $agent->browser();
-            $user_id ->os = $agent->platform();;
-            $user_id ->link_id = $curent_link ->id;
-            $user_id ->save();
+            $visitor_token = str_random(20);
+            $visitor= new Visitor;
+            $visitor ->token = $visitor_token;
+            $visitor ->browser = $agent->browser();
+            $visitor ->os = $agent->platform();;
+            $visitor ->link_id = $curent_link ->id;
+            $visitor ->save();
         }
         $curent_click = new Click;
         $curent_click ->link_id = $curent_link ->id;
         $curent_click ->link_url = $curent_link ->target_url;
-        $curent_click ->user_id = $user_id ->id;
+        $curent_click ->visitor_id = $visitor ->id;
         if ($curent_ip == '::1'){
             $curent_click ->ip = '127.0.0.1';
         }else{
             $curent_click ->ip = $curent_ip;
         }
-        $curent_click ->user_token = $user_id ->token;
-        $curent_click ->user_ua = $request->header('User-Agent');
+        $curent_click ->visitor_token = $visitor ->token;
+        $curent_click ->visitor_ua = $request->header('User-Agent');
         $curent_click ->save();
-        return redirect($curent_link->target_url)->withCookie(cookie('uid', $user_token));
+        return redirect($curent_link->target_url)->withCookie(cookie('uid', $visitor_token));
     }
 }

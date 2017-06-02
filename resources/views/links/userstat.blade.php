@@ -20,18 +20,18 @@
 
     <div class="container">
     <h4>Выберите Пользователя</h4>
-    @if ( $curent_user != null )
+    @if ( $curent_visitor != null )
       <div class="input-group input-group-lg">
         <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user" aria-hidden="false"></span></span>
         <select class="form-control" size="0" id="sel2"  aria-describedby="basic-addon1" onchange="top.location=this.value">
           <option disabled>Выберите Пользователя</option>
 
-          @foreach($users as $user)
+          @foreach($visitors as $visitor)
 
-            @if ( $user->id == $curent_user->id)
-              <option selected value=" {{ route('linkUserStat', $user->token) }}">{{ $user->token }}</option>
+            @if ( $visitor->id == $curent_visitor->id)
+              <option selected value=" {{ route('linkUserStat', $visitor->token) }}">{{ $visitor->token }}</option>
             @else
-              <option value="{{ route('linkUserStat', $user->token) }}">{{ $user->token }}</option>
+              <option value="{{ route('linkUserStat', $visitor->token) }}">{{ $visitor->token }}</option>
             @endif
 
           @endforeach 
@@ -55,10 +55,10 @@
           <tbody>
             <tr>
               <th class="text-center"><span class="glyphicon glyphicon-user" aria-hidden="false"></span></th>
-              <td><a href="{{ route('linkUsers') }}"> {{ $curent_user->token }} </a></td>
-              <td> {{ $curent_user->created_at }} </td>
-              <td> {{ $curent_user->browser }} </td>
-              <td> {{ $curent_user->os }} </td>
+              <td><a href="{{ route('linkUsers') }}"> {{ $curent_visitor->token }} </a></td>
+              <td> {{ $curent_visitor->created_at }} </td>
+              <td> {{ $curent_visitor->browser }} </td>
+              <td> {{ $curent_visitor->os }} </td>
               <td> {{ $num_link }} </td>
             </tr>
           </tbody>
@@ -94,9 +94,9 @@
         <select class="form-control" size="0" id="sel2"  aria-describedby="basic-addon1" onchange="top.location=this.value">
           <option disabled>Выберите Пользователя</option>
 
-          @foreach($users as $user)
+          @foreach($visitors as $visitor)
 
-              <option value="{{ route('linkUserStat', $user->token) }}">{{ $user->token }}</option>
+              <option value="{{ route('linkUserStat', $user->token) }}">{{ $visitor->token }}</option>
 
           @endforeach 
 

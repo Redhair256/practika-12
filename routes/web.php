@@ -16,7 +16,7 @@ Route::get('/links', 'LinkController@viewLinks')->name('linkLinks');
 
 Route::post('/create', 'LinkController@create');
 
-Route::get('/r/{link_token}', 'LinkController@redirect')->name('linkRedirect');
+Route::get('/r/{link_token}', 'VisitorController@redirect')->name('linkRedirect');
 
 
 
