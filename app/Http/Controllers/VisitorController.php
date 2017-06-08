@@ -38,10 +38,15 @@ class VisitorController extends Controller
     {
         //
         if ($id != '0'){
+            /*
             $curent_visitor = Visitor::where('token', $id)->first();
             $clicks = Click::where('visitor_id', $curent_visitor->id)->orderBy('created_at', 'desc')
             ->paginate($this->stringsPerPage);
             $num_link = Click::where('visitor_id', $curent_visitor->id)->count();
+            */
+            $curent_visitor = Visitor::with('clicks')->where('id', 1)->first(); // Запрос получит ссылку и все принадлежащие ей клики (массив $link->clicks).
+            $clicks = $curent_visitor->clicks()->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
+            $num_link = $curent_visitor->clicks->count();
         }else{
             $curent_visitor = null;
             $clicks = null;

@@ -99,9 +99,6 @@ class LinkController extends Controller
 
     public function viewStat($id = '123')
     {
-        /*
-        $curent_link = Link::where('token', $id)->first();
-        */
         $links = Link::orderBy('created_at', 'desc')->get();
         
         $curent_link = Link::with('clicks')->where('id', 1)->first(); // Запрос получит ссылку и все принадлежащие ей клики (массив $link->clicks).
@@ -109,10 +106,9 @@ class LinkController extends Controller
             $id = '';
             return view('links.statistics',[ 'links' => $links, 'curent_link' => $curent_link]);
         }
-        /*
-        $clicks = Click::where('link_id', $curent_link->id)->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);*/
-        $clicks = $link->clicks->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
-        $num_click = $clicks->count();
+        
+        $clicks = $curent_link->clicks()->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
+        $num_click = $curent_link->clicks->count();
         return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);   
     }
 
