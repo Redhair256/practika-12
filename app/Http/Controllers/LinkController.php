@@ -20,6 +20,12 @@ class LinkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()   //Защита авторизацией.
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
 //      !!! При использовании groupBy обязательно установить
@@ -93,15 +99,19 @@ class LinkController extends Controller
 
     public function viewStat($id = '123')
     {
-        //
+        /*
         $curent_link = Link::where('token', $id)->first();
+        */
         $links = Link::orderBy('created_at', 'desc')->get();
+        
+        $curent_link = Link::with('clicks')->where('id', 1)->first(); // Запрос получит ссылку и все принадлежащие ей клики (массив $link->clicks).
         if ($curent_link == null) {
             $id = '';
             return view('links.statistics',[ 'links' => $links, 'curent_link' => $curent_link]);
         }
-
-        $clicks = Click::where('link_id', $curent_link->id)->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
+        /*
+        $clicks = Click::where('link_id', $curent_link->id)->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);*/
+        $clicks = $link->clicks->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
         $num_click = $clicks->count();
         return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);   
     }

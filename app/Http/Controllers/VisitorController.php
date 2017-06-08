@@ -21,12 +21,17 @@ class VisitorController extends Controller
      * @return \Illuminate\Http\Response
      */
     
+    public function __construct()   //Защита авторизацией.
+    {
+        $this->middleware('auth');
+    }
+
     public function viewUsers($id = '0')
     {
         //
         $visitors = Visitor::orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
     
-        return view('links.users',[ 'visitors' => $visitors, 'visitor_id' => $id ] );
+        return view('visitors.index',[ 'visitors' => $visitors, 'visitor_id' => $id ] );
     }
 
     public function viewUserStat($id = '0')
@@ -43,48 +48,7 @@ class VisitorController extends Controller
             $num_link = 0;
         }
         $visitors = Visitor::orderBy('created_at', 'desc')->get(['id', 'token']);
-        return view('links.userstat', [ 'visitors' => $visitors, 'curent_visitor' => $curent_visitor, 'clicks' => $clicks, 'num_link' => $num_link ] );
+        return view('visitors.statistic', [ 'visitors' => $visitors, 'curent_visitor' => $curent_visitor, 'clicks' => $clicks, 'num_link' => $num_link ] );
     }
 
-    public function redirect(Request $request, $link_token)
-    {
-        $curent_ip = $request ->ip();
-        $agent = new Agent();
-        $agent->setUserAgent($request->header('User-Agent')); 
-        $curent_link = Link::where('token', $link_token)->first();
-        if($agent->isRobot()){
-            return redirect($curent_link->target_url);
-        }
-
-        $visitor_token = Cookie::get('uid');
-
-        if($visitor_token != null){
-            $visitor = Visitor::where('token', $visitor_token)->first();
-        }else{
-            $visitor = null;
-        }
-        if($visitor == null){
-
-            $visitor_token = str_random(20);
-            $visitor= new Visitor;
-            $visitor ->token = $visitor_token;
-            $visitor ->browser = $agent->browser();
-            $visitor ->os = $agent->platform();;
-            $visitor ->link_id = $curent_link ->id;
-            $visitor ->save();
-        }
-        $curent_click = new Click;
-        $curent_click ->link_id = $curent_link ->id;
-        $curent_click ->link_url = $curent_link ->target_url;
-        $curent_click ->visitor_id = $visitor ->id;
-        if ($curent_ip == '::1'){
-            $curent_click ->ip = '127.0.0.1';
-        }else{
-            $curent_click ->ip = $curent_ip;
-        }
-        $curent_click ->visitor_token = $visitor ->token;
-        $curent_click ->visitor_ua = $request->header('User-Agent');
-        $curent_click ->save();
-        return redirect($curent_link->target_url)->withCookie(cookie('uid', $visitor_token));
-    }
 }
