@@ -43,7 +43,3 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 	return redirect()->route('main');
 	})->name('logout');*/
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

@@ -74,8 +74,8 @@ class StatisticController extends Controller
             return view('links.statistics',[ 'links' => $links, 'curent_link' => $curent_link]);
         }
 
-        $clicks = Click::where('link_id', $curent_link->id)->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
-        $num_click = Click::where('link_id', $curent_link->id)->orderBy('created_at', 'desc')->get()->count();
+        $clicks = $curent_link->clicks()->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
+        $num_click = $curent_link->clicks()->count();
         return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);   
     }
 }

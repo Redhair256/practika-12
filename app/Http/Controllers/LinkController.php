@@ -101,18 +101,18 @@ class LinkController extends Controller
     {
         $links = Link::orderBy('created_at', 'desc')->get();
         
-        $curent_link = Link::with('clicks')->where('id', 1)->first(); // Запрос получит ссылку и все принадлежащие ей клики (массив $link->clicks).
+        $curent_link = Link::where('token',$id)->first(); // Запрос получит ссылку и все принадлежащие ей клики (массив $link->clicks).
         if ($curent_link == null) {
             $id = '';
             return view('links.statistics',[ 'links' => $links, 'curent_link' => $curent_link]);
         }
         
         $clicks = $curent_link->clicks()->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
-        $num_click = $curent_link->clicks->count();
+        $num_click = $curent_link->clicks()->count();
         return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);   
     }
 
-    public function viewUsers($id = '0')
+ /*   public function viewUsers($id = '0')
     {
         //
         $users = User_id::orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
@@ -125,9 +125,8 @@ class LinkController extends Controller
         //
         if ($id != '0'){
             $curent_user = User_id::where('token', $id)->first();
-            $clicks = Click::where('user_id', $curent_user->id)->orderBy('created_at', 'desc')
-            ->paginate($this->stringsPerPage);
-            $num_link = Click::where('user_id', $curent_user->id)->count();
+            $clicks = $curent_link->clicks()->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
+            $num_link = $curent_link->clicks()->count();
         }else{
             $curent_user = null;
             $clicks = null;
@@ -177,5 +176,5 @@ class LinkController extends Controller
         $curent_click ->user_ua = $request->header('User-Agent');
         $curent_click ->save();
         return redirect($curent_link->target_url)->withCookie(cookie('uid', $user_token));
-    }
+    }*/
 }
