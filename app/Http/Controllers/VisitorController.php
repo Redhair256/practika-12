@@ -47,7 +47,7 @@ class VisitorController extends Controller
             $curent_visitor = Visitor::where('token', $id)->first(); // Запрос получит ссылку и все принадлежащие ей клики (массив $link->clicks).
             if ($curent_visitor != null){
                 $clicks = $curent_visitor->clicks()->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
-                $num_link = $curent_visitor->clicks()->count();
+                $num_link = $clicks->total;
 
             }else{
                 $clicks = null;

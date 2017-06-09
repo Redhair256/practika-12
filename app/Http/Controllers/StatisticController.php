@@ -75,7 +75,7 @@ class StatisticController extends Controller
         }
 
         $clicks = $curent_link->clicks()->orderBy('created_at', 'desc')->paginate($this->stringsPerPage);
-        $num_click = $curent_link->clicks()->count();
+        $num_click = $clicks->total;
         return view('links.statistics',[ 'links' => $links, 'clicks' => $clicks, 'curent_link' => $curent_link, 'num_click' => $num_click ]);   
     }
 }
